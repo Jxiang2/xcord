@@ -1,5 +1,13 @@
 # xcord - a discord clone project
 
+## Programming Language
+  TypeScript
+
 ## Tech Stack
-  backend: NodeJS, ExpressJS, SocketIO
-  frontend: React-redux
+  Database: MongoDB
+  
+  Server: NodeJS, ExpressJS, SocketIO
+  
+  Client: React-redux
+  
+

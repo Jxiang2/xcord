@@ -1,1 +1,1 @@
-# xcord
+# xcord - a discord clone project

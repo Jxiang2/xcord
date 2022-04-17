@@ -1,13 +1,14 @@
 require('dotenv').config();
 
-import http from "http";
 import mongoose from "mongoose";
 import app from "./app";
+import http from "http";
+import type { Server } from "http";
 
-const PORT: string | number = process.env.PORT || 8000;
-const server: http.Server = http.createServer(app);
+const PORT: string = process.env.PORT || "8000";
+const server: Server = http.createServer(app);
 
-// start db and server
+// connect to db and start server
 mongoose.connect(process.env.MONGO_URI!)
   .then(() => {
     server.listen(PORT, () => {

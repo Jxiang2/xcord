@@ -7,7 +7,4 @@
   Database: MongoDB
   
   Server: NodeJS, ExpressJS, SocketIO
-  
-  Client: React-redux
-  
 

@@ -2,8 +2,9 @@ import express from 'express';
 import cors from "cors";
 import morgan from "morgan";
 import authRoutes from "./routes/auth.routes";
+import type { Application } from "express";
 
-const app: express.Application = express();
+const app: Application = express();
 
 // middlewares
 app.use(morgan("combined"));

@@ -1,8 +1,7 @@
 import express from 'express';
 import cors from "cors";
 import morgan from "morgan";
-
-import type { Request, Response } from "express";
+import authRoutes from "./routes/auth.routes";
 
 const app: express.Application = express();
 
@@ -12,8 +11,5 @@ app.use(express.json());
 app.use(cors());
 
 // routes
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ "message": "hello world!" });
-});
-
+app.use("/api/auth", authRoutes);
 export default app;

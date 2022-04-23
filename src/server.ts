@@ -12,7 +12,7 @@ const server: Server = http.createServer(app);
 mongoose.connect(process.env.MONGO_URI!)
   .then(() => {
     server.listen(PORT, () => {
-      console.log(`Xcord server is listening on ${PORT}`);
+      console.log(`X cord server is listening on ${PORT}`);
     });
   })
   .catch(err => console.log(err));

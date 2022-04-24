@@ -25,8 +25,16 @@ const loginSchema: Joi.ObjectSchema = Joi.object({
   mail: Joi.string().email().required(),
 });
 
+/**
+ * change username
+ */
+const changeUsernameSchema: Joi.ObjectSchema = Joi.object({
+  newUsername: Joi.string().min(3).max(12).required(),
+});
+
 router.post("/register", validator.body(registerSchema), authControllers.postRegister);
 router.post("/login", validator.body(loginSchema), authControllers.postLogin);
+router.patch("/username", verifyToken as RequestHandler, validator.body(changeUsernameSchema), authControllers.changeUsername);
 
 // test auth middleware
 router.get("/test", verifyToken as RequestHandler, (req: Request, res: Response) => {

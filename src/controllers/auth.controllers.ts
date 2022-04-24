@@ -1,12 +1,13 @@
-require('dotenv').config();
-
+import jwt from "jsonwebtoken";
 import userSchema from "../models/user.models";
 import UserModels from "../models/user.models";
-import type {IUserDetails} from "./auth.helpers";
 import {getJWTToken} from "./auth.helpers";
 import bcrypt from "bcryptjs";
 
 import type {Request, Response} from "express";
+import {IRequestCustom, IUserDetails} from "../interfaces";
+
+require('dotenv').config();
 
 /**
  * Register new user
@@ -20,7 +21,7 @@ const postRegister = async (req: Request, res: Response) => {
     // check if user exits
     const userExists = await userSchema.exists({"mail": mail});
     if (userExists)
-      return res.status(409).json({error: "Email already exists"});
+      return res.status(409).json({message: "email already exists"});
 
     // encrypt password
     const encrypted = await bcrypt.hash(password, 10);
@@ -40,7 +41,7 @@ const postRegister = async (req: Request, res: Response) => {
 
     return res.status(201).json(userDetails);
   } catch (err) {
-    return res.status(500).json({error: "User Register failed"});
+    return res.status(500).json({message: "user register failed"});
   }
 };
 
@@ -63,15 +64,48 @@ const postLogin = async (req: Request, res: Response) => {
       return res.status(200).json(userDetails);
     }
 
-    return res.status(404).json({error: "Invalid credentials"});
+    return res.status(404).json({message: "invalid credentials"});
   } catch (e) {
-    return res.status(500).json({error: "User Login failed"});
+    return res.status(500).json({message: "user Login failed"});
+  }
+};
+
+/**
+ * change username
+ * @param expressReq
+ * @param res
+ */
+const changeUsername = async (expressReq: Request, res: Response) => {
+  try {
+    const req = expressReq as IRequestCustom;
+    const newUsername = req.body.newUsername;
+
+    if (typeof req === "string")
+      return res.status(500).json({message: "failed to retrieve JWT payload"});
+
+    const reqUser = req.user as jwt.JwtPayload;
+
+    const user = await UserModels.findByIdAndUpdate(reqUser.userId, {username: newUsername});
+
+    if (user.username === newUsername)
+      return res.status(400).json({message: "new username must be different"});
+
+    return res.status(200).json({
+      message: "username updated",
+      user: {
+        username: newUsername,
+        mail: user.mail
+      }
+    });
+  } catch (e) {
+    return res.status(500).json({message: "change username failed"});
   }
 };
 
 const authControllers = {
   postLogin,
-  postRegister
+  postRegister,
+  changeUsername
 };
 
 export default authControllers;

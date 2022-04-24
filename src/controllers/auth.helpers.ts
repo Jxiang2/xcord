@@ -1,21 +1,18 @@
 import jwt from "jsonwebtoken";
 
-interface IUserDetails {
-  mail: string;
-  token: string;
-  username: string;
-}
-
-// create JWT token
+/**
+ * create new JWT token
+ * @param userId
+ * @param mail
+ */
 const getJWTToken = (userId: string, mail: string) => {
   return jwt.sign(
     {userId, mail},
     process.env.TOKEN_KEY as string,
-    {expiresIn: "24h"}
+    {expiresIn: "4h"}
   );
 };
 
-export type {IUserDetails};
 export {
   getJWTToken
 };

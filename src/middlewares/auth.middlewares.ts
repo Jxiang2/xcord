@@ -3,7 +3,7 @@ require('dotenv').config();
 import jwt from "jsonwebtoken";
 
 import type {NextFunction, Response} from "express";
-import {IRequestCustom} from "../interfaces";
+import {IRequestCustom} from "../types";
 
 /**
  * verify the existence and validity of the JWT token

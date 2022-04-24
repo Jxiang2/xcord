@@ -5,7 +5,7 @@ import {getJWTToken} from "./auth.helpers";
 import bcrypt from "bcryptjs";
 
 import type {Request, Response} from "express";
-import {IRequestCustom, IUserDetails} from "../interfaces";
+import {IRequestCustom, IUserDetails} from "../types";
 
 require('dotenv').config();
 
@@ -79,9 +79,6 @@ const changeUsername = async (expressReq: Request, res: Response) => {
   try {
     const req = expressReq as IRequestCustom;
     const newUsername = req.body.newUsername;
-
-    if (typeof req === "string")
-      return res.status(500).json({message: "failed to retrieve JWT payload"});
 
     const reqUser = req.user as jwt.JwtPayload;
 

@@ -13,10 +13,10 @@ const getJWTToken = (userId: string, mail: string) => {
     process.env.TOKEN_KEY as string,
     {expiresIn: "24h"}
   );
-}
+};
 
-export type {IUserDetails}
-export  {
+export type {IUserDetails};
+export {
   getJWTToken
-}
+};
 

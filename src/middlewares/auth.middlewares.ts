@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 import jwt from "jsonwebtoken";
-import type { NextFunction, Request, Response } from "express";
+import type {NextFunction, Request, Response} from "express";
 
 interface IRequestCustom extends Request {
   user: string | jwt.JwtPayload;
@@ -21,6 +21,6 @@ const verifyToken = (req: IRequestCustom, res: Response, next: NextFunction) => 
   }
 
   return next();
-}
+};
 
 export default verifyToken;

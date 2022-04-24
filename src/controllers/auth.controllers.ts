@@ -79,7 +79,6 @@ const changeUsername = async (expressReq: Request, res: Response) => {
   try {
     const req = expressReq as IRequestCustom;
     const newUsername = req.body.newUsername;
-
     const reqUser = req.user as jwt.JwtPayload;
 
     const user = await UserModels.findByIdAndUpdate(reqUser.userId, {username: newUsername});

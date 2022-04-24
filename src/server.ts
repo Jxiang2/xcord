@@ -9,7 +9,7 @@ const PORT: string = process.env.PORT || "8000";
 const server: Server = http.createServer(app);
 
 // connect to db and start server
-mongoose.connect(process.env.MONGO_URI!)
+mongoose.connect(process.env.MONGO_URI as string)
   .then(() => {
     server.listen(PORT, () => {
       console.log(`X cord server is listening on ${PORT}`);

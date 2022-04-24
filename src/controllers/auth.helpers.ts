@@ -13,7 +13,5 @@ const getJWTToken = (userId: string, mail: string) => {
   );
 };
 
-export {
-  getJWTToken
-};
+export {getJWTToken};
 

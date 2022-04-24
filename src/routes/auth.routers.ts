@@ -12,8 +12,8 @@ const router: Router = express.Router();
  * register require username, password and email
  */
 const registerSchema: Joi.ObjectSchema = Joi.object({
-  username: Joi.string().min(3).max(12).required(),
-  password: Joi.string().min(6).max(12).required(),
+  username: Joi.string().min(3).max(20).required(),
+  password: Joi.string().min(6).max(20).required(),
   mail: Joi.string().email().required(),
 });
 
@@ -21,7 +21,7 @@ const registerSchema: Joi.ObjectSchema = Joi.object({
  * login require mail and password
  */
 const loginSchema: Joi.ObjectSchema = Joi.object({
-  password: Joi.string().min(6).max(12).required(),
+  password: Joi.string().min(6).max(20).required(),
   mail: Joi.string().email().required(),
 });
 
@@ -29,7 +29,7 @@ const loginSchema: Joi.ObjectSchema = Joi.object({
  * change username
  */
 const changeUsernameSchema: Joi.ObjectSchema = Joi.object({
-  newUsername: Joi.string().min(3).max(12).required(),
+  newUsername: Joi.string().min(3).max(20).required(),
 });
 
 router.post("/register", validator.body(registerSchema), authControllers.postRegister);

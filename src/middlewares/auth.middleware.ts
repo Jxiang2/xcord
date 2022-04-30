@@ -11,7 +11,7 @@ import {IRequestCustom} from "../types";
  * @param res
  * @param next
  */
-const verifyToken = (req: IRequestCustom, res: Response, next: NextFunction) => {
+export const verifyToken = (req: IRequestCustom, res: Response, next: NextFunction) => {
   let token: string = req.body.token || req.query.token || req.headers["authorization"];
 
   if (!token)
@@ -27,5 +27,3 @@ const verifyToken = (req: IRequestCustom, res: Response, next: NextFunction) => 
 
   return next();
 };
-
-export default verifyToken;

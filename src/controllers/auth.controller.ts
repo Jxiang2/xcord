@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import userSchema from "../models/user.models";
-import UserModels from "../models/user.models";
+import userSchema from "../models/user.model";
+import UserModels from "../models/user.model";
 import {getJWTToken} from "./auth.helpers";
 import bcrypt from "bcryptjs";
 
@@ -98,10 +98,10 @@ const changeUsername = async (expressReq: Request, res: Response) => {
   }
 };
 
-const authControllers = {
+const authController = {
   postLogin,
   postRegister,
   changeUsername
 };
 
-export default authControllers;
+export default authController;

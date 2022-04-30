@@ -2,8 +2,8 @@ import type {Request, RequestHandler, Response, Router} from "express";
 import express from "express";
 import expressValidation from "express-joi-validation";
 import Joi from "joi";
-import authControllers from "../controllers/auth.controllers";
-import verifyToken from "../middlewares/auth.middlewares";
+import authController from "../controllers/auth.controller";
+import {verifyToken} from "../middlewares/auth.middleware";
 
 const validator = expressValidation.createValidator({});
 const router: Router = express.Router();
@@ -32,9 +32,9 @@ const changeUsernameSchema: Joi.ObjectSchema = Joi.object({
   newUsername: Joi.string().min(3).max(20).required(),
 });
 
-router.post("/register", validator.body(registerSchema), authControllers.postRegister);
-router.post("/login", validator.body(loginSchema), authControllers.postLogin);
-router.patch("/username", verifyToken as RequestHandler, validator.body(changeUsernameSchema), authControllers.changeUsername);
+router.post("/register", validator.body(registerSchema), authController.postRegister);
+router.post("/login", validator.body(loginSchema), authController.postLogin);
+router.patch("/username", verifyToken as RequestHandler, validator.body(changeUsernameSchema), authController.changeUsername);
 
 // test auth middleware
 router.get("/test", verifyToken as RequestHandler, (req: Request, res: Response) => {

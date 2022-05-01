@@ -1,6 +1,7 @@
 import {Server} from "socket.io";
 import type http from "http";
-import {verifyTokenSocket} from "../middlewares/authSocket.middleware";
+import {verifyTokenSocket} from "./middlewares/authSocket.middleware";
+import {newConnectionHandler} from "./socketHandlers/newConnectionHandler";
 
 export const registerSocketServer = (httpServer: http.Server) => {
   const io = new Server(httpServer, {
@@ -15,7 +16,7 @@ export const registerSocketServer = (httpServer: http.Server) => {
 
   // events
   io.on("connection", (socket) => {
-    console.log("a user connected");
-    console.log(socket.id);
+    console.log(socket.id, "a user connected");
+    newConnectionHandler(socket, io);
   });
 };

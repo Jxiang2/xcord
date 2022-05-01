@@ -1,4 +1,4 @@
-import {registerSocketServer} from "./sockets/socketServer";
+import {registerSocketServer} from "./socketServer";
 import mongoose from "mongoose";
 import app from "./app";
 import type {Server} from "http";

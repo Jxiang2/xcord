@@ -2,6 +2,7 @@ import {Server} from "socket.io";
 import type http from "http";
 import {verifyTokenSocket} from "./middlewares/authSocket.middlewares";
 import {newConnectionHandler} from "./socketHandlers/newConnectionHandler";
+import {NextFunction} from "express";
 
 /**
  * use socket.io server to wrap the http server
@@ -16,7 +17,7 @@ export const registerSocketServer = (httpServer: http.Server) => {
   });
 
   // middleware, invoked before events
-  io.use((socket, next: any) => verifyTokenSocket(socket, next));
+  io.use((socket, next: any | NextFunction) => verifyTokenSocket(socket, next));
 
   // events
   io.on("connection", (socket) => {

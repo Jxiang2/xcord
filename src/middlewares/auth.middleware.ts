@@ -20,7 +20,6 @@ export const verifyToken = (req: IRequestCustom, res: Response, next: NextFuncti
   try {
     token = token.replace(/^Bearer\s+/, "");
     req.user = jwt.verify(token, process.env.TOKEN_KEY!);
-    console.log(req.user);
   } catch (err) {
     return res.status(401).json({message: "invalid token"});
   }

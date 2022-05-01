@@ -9,7 +9,7 @@ const connectedUsers = new Map();
  */
 const addNewConnectedUser = ({socketId, userId}: IAddNewConnectedUser) => {
   connectedUsers.set(socketId, {userId});
-  console.log(connectedUsers, "connected");
+  console.log(connectedUsers, "added to connectedUsers");
 };
 
 export {

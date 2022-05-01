@@ -3,6 +3,7 @@ import type http from "http";
 import {verifyTokenSocket} from "./middlewares/authSocket.middlewares";
 import {newConnectionHandler} from "./socketHandlers/newConnectionHandler";
 import {NextFunction} from "express";
+import {disconnectHandler} from "./socketHandlers/disconnectHandler";
 
 /**
  * use socket.io server to wrap the http server
@@ -23,5 +24,9 @@ export const registerSocketServer = (httpServer: http.Server) => {
   io.on("connection", (socket) => {
     console.log("A user with SocketID:", socket.id, "connected");
     newConnectionHandler(socket, io);
+
+    socket.on("disconnect", () => {
+      disconnectHandler(socket);
+    });
   });
 };

@@ -2,11 +2,11 @@ import type {Request} from "express";
 import type {JwtPayload} from "jsonwebtoken";
 import type {Socket} from "socket.io";
 
-interface IRequestCustom extends Request {
+export interface IRequestCustom extends Request {
   user: string | JwtPayload;
 }
 
-interface ISocketJwtPayload extends JwtPayload {
+export interface ISocketJwtPayload extends JwtPayload {
   user: {
     userId: string,
     mail: string,
@@ -15,25 +15,17 @@ interface ISocketJwtPayload extends JwtPayload {
   };
 }
 
-interface ISocketData extends Socket {
+export interface ISocketData extends Socket {
   user: string | ISocketJwtPayload;
 }
 
-interface IUserDetails {
+export interface IUserDetails {
   mail: string;
   token: string;
   username: string;
 }
 
-interface IAddNewConnectedUser {
+export interface IAddNewConnectedUser {
   socketId: string;
   userId: string;
 }
-
-export type {
-  IRequestCustom,
-  IUserDetails,
-  IAddNewConnectedUser,
-  ISocketData,
-  ISocketJwtPayload
-};

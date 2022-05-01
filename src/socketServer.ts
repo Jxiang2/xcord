@@ -1,6 +1,6 @@
 import {Server} from "socket.io";
 import type http from "http";
-import {verifyTokenSocket} from "./middlewares/authSocket.middleware";
+import {verifyTokenSocket} from "./middlewares/authSocket.middlewares";
 import {newConnectionHandler} from "./socketHandlers/newConnectionHandler";
 
 /**

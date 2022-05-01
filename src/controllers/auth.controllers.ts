@@ -1,7 +1,7 @@
 require('dotenv').config();
 import jwt from "jsonwebtoken";
-import userSchema from "../models/user.model";
-import UserModels from "../models/user.model";
+import userSchema from "../models/user.models";
+import UserModels from "../models/user.models";
 import {getJWTToken} from "./auth.helper";
 import bcrypt from "bcryptjs";
 import type {Request, Response} from "express";
@@ -97,10 +97,10 @@ const changeUsername = async (expressReq: Request, res: Response) => {
   }
 };
 
-const authController = {
+const authControllers = {
   postLogin,
   postRegister,
   changeUsername
 };
 
-export default authController;
+export default authControllers;

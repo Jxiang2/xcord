@@ -2,7 +2,7 @@ import type {Application} from "express";
 import express from 'express';
 import cors from "cors";
 import morgan from "morgan";
-import authRoutes from "./routes/auth.router";
+import authRoutes from "./routes/auth.routers";
 
 const app: Application = express();
 

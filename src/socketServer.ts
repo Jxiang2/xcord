@@ -3,6 +3,10 @@ import type http from "http";
 import {verifyTokenSocket} from "./middlewares/authSocket.middleware";
 import {newConnectionHandler} from "./socketHandlers/newConnectionHandler";
 
+/**
+ * use socket.io server to wrap the http server
+ * @param httpServer
+ */
 export const registerSocketServer = (httpServer: http.Server) => {
   const io = new Server(httpServer, {
     cors: {

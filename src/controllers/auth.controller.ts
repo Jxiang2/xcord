@@ -1,13 +1,12 @@
+require('dotenv').config();
 import jwt from "jsonwebtoken";
 import userSchema from "../models/user.model";
 import UserModels from "../models/user.model";
-import {getJWTToken} from "./auth.helpers";
+import {getJWTToken} from "./auth.helper";
 import bcrypt from "bcryptjs";
-
 import type {Request, Response} from "express";
 import {IRequestCustom, IUserDetails} from "../types";
 
-require('dotenv').config();
 
 /**
  * Register new user

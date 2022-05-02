@@ -22,7 +22,6 @@ export const registerSocketServer = (httpServer: http.Server) => {
 
   // events
   io.on("connection", (socket) => {
-    console.log("A user with SocketID:", socket.id, "connected");
     newConnectionHandler(socket, io);
 
     socket.on("disconnect", () => {

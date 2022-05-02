@@ -9,7 +9,7 @@ const connectedUsers = new Map(); // online indicator
  */
 const addNewConnectedUser = ({socketId, userId}: IAddNewConnectedUser) => {
   connectedUsers.set(socketId, {userId});
-  console.log(connectedUsers, "added to connectedUsers");
+  console.log("current connected users: ", connectedUsers);
 };
 
 /**
@@ -19,7 +19,7 @@ const addNewConnectedUser = ({socketId, userId}: IAddNewConnectedUser) => {
 const removeConnectedUser = (socketId: string) => {
   if (connectedUsers.has(socketId)) {
     connectedUsers.delete(socketId);
-    console.log("new connected users: ", connectedUsers);
+    console.log("current connected users: ", connectedUsers);
   }
 };
 

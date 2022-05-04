@@ -3,7 +3,7 @@ import express from "express";
 import expressValidation from "express-joi-validation";
 import Joi from "joi";
 import {verifyToken} from "../middlewares/auth.middlewares";
-import friendsControllers from "../controllers/friends.controllers";
+import friendControllers from "../controllers/friend.controllers";
 
 const validator = expressValidation.createValidator({});
 const router: Router = express.Router();
@@ -17,7 +17,7 @@ const friendInviteSchema: Joi.ObjectSchema = Joi.object({
 
 router.post(
   "/invite", verifyToken as RequestHandler,
-  validator.body(friendInviteSchema), friendsControllers.postInvite
+  validator.body(friendInviteSchema), friendControllers.postInvite
 );
 
 export default router;

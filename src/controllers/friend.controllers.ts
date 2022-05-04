@@ -10,8 +10,8 @@ const postInvite = async (req: Request, res: Response) => {
   return res.send(`controller is sending: ${targetMail}`);
 };
 
-const friendsControllers = {
+const friendControllers = {
   postInvite,
 };
 
-export default friendsControllers;
+export default friendControllers;

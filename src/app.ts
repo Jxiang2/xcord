@@ -3,7 +3,7 @@ import express from 'express';
 import cors from "cors";
 import morgan from "morgan";
 import authRoutes from "./routes/auth.routers";
-import friendsRoutes from "./routes/friends.routers";
+import friendsRoutes from "./routes/friend.routers";
 
 const app: Application = express();
 

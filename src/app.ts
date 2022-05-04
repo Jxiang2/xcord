@@ -3,6 +3,7 @@ import express from 'express';
 import cors from "cors";
 import morgan from "morgan";
 import authRoutes from "./routes/auth.routers";
+import friendsRoutes from "./routes/friends.routers";
 
 const app: Application = express();
 
@@ -12,5 +13,6 @@ app.use(express.json());
 app.use(cors());
 
 // routes
+app.use("/api/friend-invite", friendsRoutes);
 app.use("/api/auth", authRoutes);
 export default app;

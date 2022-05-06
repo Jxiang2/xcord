@@ -50,7 +50,7 @@ const postInvite = async (expressReq: Request, res: Response) => {
   });
 
   // send real-time pending invites update to specific user
-  updateFriendsPendingInvites(targetUser._id.toString());
+  await updateFriendsPendingInvites(targetUser._id.toString());
 
   return res.status(201).json({message: "Invitation sent"});
 };

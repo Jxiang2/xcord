@@ -2,6 +2,7 @@ import {Request, Response} from "express";
 import {ICustomRequest, IJwtUser} from "../types";
 import UserModels from "../models/user.models";
 import friendInvite from "../models/friendInvite.models";
+import {updateFriendsPendingInvites} from "../socketHandlers/friendsUpdates";
 
 /**
  * send friend invitation
@@ -47,6 +48,9 @@ const postInvite = async (expressReq: Request, res: Response) => {
     senderId: userId,
     receiverId: targetUser._id
   });
+
+  // send real-time pending invites update to specific user
+  updateFriendsPendingInvites(targetUser._id.toString());
 
   return res.status(201).json({message: "Invitation sent"});
 };

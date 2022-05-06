@@ -1,8 +1,8 @@
-import {removeConnectedUser} from "../socketStorage";
+import socketStorage from "../socketStorage";
 import {Socket} from "socket.io";
 
 const disconnectHandler = (socket: Socket) => {
-  removeConnectedUser(socket.id);
+  socketStorage.removeConnectedUser(socket.id);
 };
 
 export {

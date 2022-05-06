@@ -1,6 +1,18 @@
 import {IAddNewConnectedUser} from "./types";
+import {Server} from "socket.io";
+import {DefaultEventsMap} from "socket.io/dist/typed-events";
 
 const connectedUsers = new Map(); // online indicator
+
+let io: Server<DefaultEventsMap, DefaultEventsMap> | null = null;
+
+const setSocketIoInstance = (ioInstance: Server<DefaultEventsMap, DefaultEventsMap> ) => {
+  io = ioInstance;
+}
+
+const getSocketIoInstance = () => {
+  return io;
+}
 
 /**
  * add new connector to the temporary memory
@@ -23,7 +35,28 @@ const removeConnectedUser = (socketId: string) => {
   }
 };
 
-export {
+/**
+ * get a users' all currently online sockets
+ * @param userId
+ */
+const getActiveUsers = (userId: string) => {
+  const activeConnections: string[] = [];
+
+  // key: socketId, value: userId
+  connectedUsers.forEach((key, value) => {
+    if (value.userId === userId)
+      activeConnections.push(key)
+  });
+
+  return activeConnections;
+}
+
+const socketStorage =  {
   addNewConnectedUser,
-  removeConnectedUser
+  removeConnectedUser,
+  getActiveUsers,
+  setSocketIoInstance,
+  getSocketIoInstance
 };
+
+export default socketStorage;

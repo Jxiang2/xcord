@@ -43,7 +43,7 @@ const getActiveUsers = (userId: string) => {
   const activeConnections: string[] = [];
 
   // key: socketId, value: userId
-  connectedUsers.forEach((key, value) => {
+  connectedUsers.forEach((value, key) => {
     if (value.userId === userId)
       activeConnections.push(key)
   });

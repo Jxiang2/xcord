@@ -37,7 +37,7 @@ const postInvite = async (expressReq: Request, res: Response) => {
 
   // if the user we invite is already a friend
   const usersAlreadyFriends = targetUser.friends
-    .find((curUserId: any) => curUserId.toString() === userId.toString())
+    .find((friendId: any) => friendId.toString() === userId.toString())
 
   if (usersAlreadyFriends) {
     return res.status(409).json({message: "This friend is already invited"});
@@ -49,7 +49,7 @@ const postInvite = async (expressReq: Request, res: Response) => {
     receiverId: targetUser._id
   });
 
-  // send real-time pending invites update to specific user
+  // send real-time pending friend invites update to specific user
   await updateFriendsPendingInvites(targetUser._id.toString());
 
   return res.status(201).json({message: "Invitation sent"});

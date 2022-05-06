@@ -13,7 +13,7 @@ export interface ICustomRequest extends Request {
   user: string | IJwtUser;
 }
 
-export interface ISocketData extends Socket {
+export interface ICustomSocketData extends Socket {
   user: string | IJwtUser;
 }
 

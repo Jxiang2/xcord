@@ -1,6 +1,6 @@
 import {addNewConnectedUser} from "../socketStorage";
 import {Socket} from "socket.io";
-import {IJwtUser, ISocketData} from "../types";
+import {ICustomSocketData, IJwtUser} from "../types";
 
 /**
  * handle new connector
@@ -8,7 +8,7 @@ import {IJwtUser, ISocketData} from "../types";
  * @param io
  */
 const newConnectionHandler = (socket: Socket, io: unknown) => {
-  const customSocket = socket as ISocketData;
+  const customSocket = socket as ICustomSocketData;
   const userDetail = customSocket.user as IJwtUser;
 
   addNewConnectedUser({

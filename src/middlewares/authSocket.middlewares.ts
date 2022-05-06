@@ -1,7 +1,7 @@
 require('dotenv').config();
 import {NextFunction} from "express";
 import jwt from "jsonwebtoken";
-import {IJwtUser, ISocketData} from "../types";
+import {ICustomSocketData, IJwtUser} from "../types";
 import {Socket} from "socket.io";
 
 /**
@@ -10,7 +10,7 @@ import {Socket} from "socket.io";
  * @param next
  */
 export const verifyTokenSocket = (socket: Socket, next: NextFunction) => {
-  const customSocket = socket as ISocketData;
+  const customSocket = socket as ICustomSocketData;
   const token = customSocket.handshake.auth?.token;
 
   try {

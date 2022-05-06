@@ -65,12 +65,14 @@ const postLogin = async (req: Request, res: Response) => {
     const {mail, password} = req.body;
     const user = await UserModels.findOne({mail: mail.toLowerCase()});
 
+    // authenticate user
     if (user && await bcrypt.compare(password, user.password)) {
       const userDetails: IUserLoginData = {
         mail: user.mail,
         token: getJWTToken(user._id, user.mail),
         username: user.username
       };
+
       return res.status(200).json(userDetails);
     }
 

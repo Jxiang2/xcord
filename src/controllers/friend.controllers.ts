@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {ICustomJWTData, ICustomRequest} from "../types";
+import {ICustomRequest, IJwtUser} from "../types";
 
 /**
  * send friend invitation
@@ -9,7 +9,7 @@ import {ICustomJWTData, ICustomRequest} from "../types";
 const postInvite = async (expressReq: Request, res: Response) => {
   const req = expressReq as ICustomRequest;
   const {targetMail} = req.body;
-  const {userId, mail} = req.user as ICustomJWTData;
+  const {userId, mail} = req.user as IJwtUser;
 };
 
 const friendControllers = {

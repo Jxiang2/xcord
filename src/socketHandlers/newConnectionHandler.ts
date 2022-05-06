@@ -1,16 +1,15 @@
 import {addNewConnectedUser} from "../socketStorage";
-import {Server, Socket} from "socket.io";
-import {DefaultEventsMap} from "socket.io/dist/typed-events";
-import {ISocketData, ISocketJwtPayload} from "../types";
+import {Socket} from "socket.io";
+import {IJwtUser, ISocketData} from "../types";
 
 /**
  * handle new connector
  * @param socket
  * @param io
  */
-const newConnectionHandler = (socket: Socket, io: Server<DefaultEventsMap, DefaultEventsMap>) => {
+const newConnectionHandler = (socket: Socket, io: unknown) => {
   const customSocket = socket as ISocketData;
-  const userDetail = customSocket.user as ISocketJwtPayload;
+  const userDetail = customSocket.user as IJwtUser;
 
   addNewConnectedUser({
     socketId: customSocket.id,

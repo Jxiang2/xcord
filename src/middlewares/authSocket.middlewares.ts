@@ -1,7 +1,7 @@
 require('dotenv').config();
 import {NextFunction} from "express";
 import jwt from "jsonwebtoken";
-import {ISocketData, ISocketJwtPayload} from "../types";
+import {IJwtUser, ISocketData} from "../types";
 import {Socket} from "socket.io";
 
 /**
@@ -15,7 +15,7 @@ export const verifyTokenSocket = (socket: Socket, next: NextFunction) => {
 
   try {
     // attach user property to socket
-    customSocket.user = jwt.verify(token, process.env.TOKEN_KEY!) as ISocketJwtPayload;
+    customSocket.user = jwt.verify(token, process.env.TOKEN_KEY!) as IJwtUser;
   } catch (err) {
     const socketErr = new Error("NOT_AUTHORIZED");
     return next(socketErr);

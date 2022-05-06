@@ -31,7 +31,7 @@ const postInvite = async (expressReq: Request, res: Response) => {
   });
 
   if (inviteAlreadyReceived) {
-    return res.status(409).json("Invite is already sent");
+    return res.status(409).json({message: "Invite is already sent"});
   }
 
   // if the user we invite is already a friend

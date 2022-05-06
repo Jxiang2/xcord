@@ -2,11 +2,22 @@ require('dotenv').config();
 import jwt from "jsonwebtoken";
 import userSchema from "../models/user.models";
 import UserModels from "../models/user.models";
-import {getJWTToken} from "./auth.helper";
 import bcrypt from "bcryptjs";
 import type {Request, Response} from "express";
 import {ICustomRequest, IUserLoginData} from "../types";
 
+/**
+ * create new JWT token
+ * @param userId
+ * @param mail
+ */
+const getJWTToken = (userId: string, mail: string) => {
+  return jwt.sign(
+    {userId, mail},
+    process.env.TOKEN_KEY as string,
+    {expiresIn: "4h"}
+  );
+};
 
 /**
  * Register new user

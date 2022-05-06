@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const friendInviteSchema = new Schema({
   senderId: {
     type: Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User"
   },
   receiverId: {
     type: Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User"
   }
 });
 
-export default mongoose.model("friendInvite", friendInviteSchema);
+export default mongoose.model("FriendInvite", friendInviteSchema);

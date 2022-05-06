@@ -6,7 +6,7 @@ import http from "http";
 
 require('dotenv').config();
 
-const PORT: string = process.env.PORT || "8000";
+const PORT: string = process.env.PORT || "8080";
 
 const server: Server = http.createServer(app);
 registerSocketServer(server);

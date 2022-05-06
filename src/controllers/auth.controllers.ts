@@ -5,7 +5,7 @@ import UserModels from "../models/user.models";
 import {getJWTToken} from "./auth.helper";
 import bcrypt from "bcryptjs";
 import type {Request, Response} from "express";
-import {IRequestCustom, IUserDetails} from "../types";
+import {ICustomRequest, IUserLoginData} from "../types";
 
 
 /**
@@ -32,7 +32,7 @@ const postRegister = async (req: Request, res: Response) => {
       password: encrypted
     });
 
-    const userDetails: IUserDetails = {
+    const userDetails: IUserLoginData = {
       mail: user.mail,
       token: getJWTToken(user._id, user.mail),
       username: user.username
@@ -55,7 +55,7 @@ const postLogin = async (req: Request, res: Response) => {
     const user = await UserModels.findOne({mail: mail.toLowerCase()});
 
     if (user && await bcrypt.compare(password, user.password)) {
-      const userDetails: IUserDetails = {
+      const userDetails: IUserLoginData = {
         mail: user.mail,
         token: getJWTToken(user._id, user.mail),
         username: user.username
@@ -76,7 +76,7 @@ const postLogin = async (req: Request, res: Response) => {
  */
 const changeUsername = async (expressReq: Request, res: Response) => {
   try {
-    const req = expressReq as IRequestCustom;
+    const req = expressReq as ICustomRequest;
     const newUsername = req.body.newUsername;
     const reqUser = req.user as jwt.JwtPayload;
 

@@ -3,7 +3,7 @@ require('dotenv').config();
 import jwt from "jsonwebtoken";
 
 import type {NextFunction, Response} from "express";
-import {IRequestCustom} from "../types";
+import {ICustomJWTData, ICustomRequest} from "../types";
 
 /**
  * verify the existence and validity of the JWT token
@@ -11,7 +11,7 @@ import {IRequestCustom} from "../types";
  * @param res
  * @param next
  */
-export const verifyToken = (req: IRequestCustom, res: Response, next: NextFunction) => {
+export const verifyToken = (req: ICustomRequest, res: Response, next: NextFunction) => {
   let token: string = req.body.token || req.query.token || req.headers["authorization"];
 
   if (!token)
@@ -19,7 +19,7 @@ export const verifyToken = (req: IRequestCustom, res: Response, next: NextFuncti
 
   try {
     token = token.replace(/^Bearer\s+/, "");
-    req.user = jwt.verify(token, process.env.TOKEN_KEY!);
+    req.user = jwt.verify(token, process.env.TOKEN_KEY!) as ICustomJWTData;
   } catch (err) {
     return res.status(401).json({message: "invalid token"});
   }

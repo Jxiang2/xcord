@@ -2,8 +2,15 @@ import type {Request} from "express";
 import type {JwtPayload} from "jsonwebtoken";
 import type {Socket} from "socket.io";
 
-export interface IRequestCustom extends Request {
-  user: string | JwtPayload;
+export interface ICustomJWTData extends JwtPayload {
+  userId: string,
+  mail: string,
+  iat: number,
+  exp: number
+}
+
+export interface ICustomRequest extends Request {
+  user: string | ICustomJWTData;
 }
 
 export interface ISocketJwtPayload extends JwtPayload {
@@ -19,7 +26,7 @@ export interface ISocketData extends Socket {
   user: string | ISocketJwtPayload;
 }
 
-export interface IUserDetails {
+export interface IUserLoginData {
   mail: string;
   token: string;
   username: string;

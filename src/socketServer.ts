@@ -24,8 +24,8 @@ export const registerSocketServer = (httpServer: http.Server) => {
   io.use((socket, next: any | NextFunction) => verifyTokenSocket(socket, next));
 
   // events
-  io.on("connection", (socket) => {
-    newConnectionHandler(socket, io);
+  io.on("connection", async (socket) => {
+    await newConnectionHandler(socket, io);
 
     socket.on("disconnect", () => {
       disconnectHandler(socket);

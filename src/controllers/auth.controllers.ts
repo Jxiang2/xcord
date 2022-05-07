@@ -87,7 +87,7 @@ const postLogin = async (req: Request, res: Response) => {
  * @param expressReq
  * @param res
  */
-const changeUsername = async (expressReq: Request, res: Response) => {
+const patchChangeUsername = async (expressReq: Request, res: Response) => {
   try {
     const req = expressReq as ICustomRequest;
     const newUsername = req.body.newUsername;
@@ -113,7 +113,7 @@ const changeUsername = async (expressReq: Request, res: Response) => {
 const authControllers = {
   postLogin,
   postRegister,
-  changeUsername
+  patchChangeUsername
 };
 
 export default authControllers;

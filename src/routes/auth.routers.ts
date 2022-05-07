@@ -34,7 +34,7 @@ const changeUsernameSchema: Joi.ObjectSchema = Joi.object({
 
 router.post("/register", validator.body(registerSchema), authControllers.postRegister);
 router.post("/login", validator.body(loginSchema), authControllers.postLogin);
-router.patch("/username", verifyToken as RequestHandler, validator.body(changeUsernameSchema), authControllers.changeUsername);
+router.patch("/username", verifyToken as RequestHandler, validator.body(changeUsernameSchema), authControllers.patchChangeUsername);
 
 // test auth middleware
 router.get("/test", verifyToken as RequestHandler, (req: Request, res: Response) => {

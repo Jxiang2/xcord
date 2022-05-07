@@ -1,7 +1,7 @@
 import socketStorage from "../socketStorage";
 import {Socket} from "socket.io";
 import {ICustomSocketData, IJwtUser} from "../types";
-import {updateFriendsPendingInvites} from "./friendInviteUpdatesHandler";
+import {updateFriends, updateFriendsPendingInvites} from "./friendsUpdatesHandler";
 
 /**
  * handle new connector
@@ -19,6 +19,9 @@ const newConnectionHandler = async (socket: Socket, io: unknown) => {
 
   // send real-time pending friend invites update to specific user
   await updateFriendsPendingInvites(userDetail.userId);
+
+  // update real-time friend list
+  await updateFriends(userDetail.userId);
 };
 
 export {

@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import friendInviteModels from "../models/friendInvite.models";
-import {updateFriendsPendingInvites} from "../socketHandlers/friendInviteUpdatesHandler";
+import {updateFriends, updateFriendsPendingInvites} from "../socketHandlers/friendsUpdatesHandler";
 import {ICustomRequest, IJwtUser} from "../types";
 import FriendInviteModels from "../models/friendInvite.models";
 import userModels from "../models/user.models";
@@ -30,15 +30,21 @@ const postAccept = async (req: Request, res: Response) => {
     receiverUser.friends = [...receiverUser.friends, senderId];
 
     // update receiver's pending invites
-    await friendInviteModels.findByIdAndDelete(id)
-    console.log(receiverId);
+    await friendInviteModels.deleteMany({
+      senderId: {$in: [senderId.toString(), receiverId.toString()] },
+      receiverId: {$in: [senderId.toString(), receiverId.toString()] },
+      function () {console.log("a mongoose error occurred");}
+    })
+    await updateFriendsPendingInvites(senderId.toString());
     await updateFriendsPendingInvites(receiverId.toString());
 
-    // update the friend list of both users
-
     // save changes on user model's friends field
-    senderUser.save()
-    receiverUser.save()
+    await senderUser.save()
+    await receiverUser.save()
+
+    // update the friend list of both users
+    updateFriends(senderId.toString());
+    updateFriends(receiverId.toString());
 
     return res.status(200).json({message: "friend added"})
   } catch (e) {

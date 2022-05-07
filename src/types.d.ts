@@ -27,3 +27,9 @@ export interface IAddNewConnectedUser {
   socketId: string;
   userId: string;
 }
+
+export interface IFriendProperties {
+  _id: string
+  mail: string
+  username: string
+}

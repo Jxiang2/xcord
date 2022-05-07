@@ -11,8 +11,8 @@ export const updateFriendsPendingInvites = async (userId: string) => {
     // find all active user sockets
     const receiverSocketList = socketStorage.getActiveSockets(userId);
 
+    // socket.io server emit "friends-invitations" event to the requesting socket
     const io = socketStorage.getSocketIoInstance();
-
     receiverSocketList.forEach(rcvSocket => {
       io?.to(rcvSocket).emit("friends-invitations", {
         pendingInvites: pendingInvites ? pendingInvites: [],

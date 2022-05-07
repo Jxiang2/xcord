@@ -1,7 +1,7 @@
 import socketStorage from "../socketStorage";
 import {Socket} from "socket.io";
 import {ICustomSocketData, IJwtUser} from "../types";
-import {updateFriendsPendingInvites} from "./friendUpdatesHandler";
+import {updateFriendsPendingInvites} from "./friendInviteUpdatesHandler";
 
 /**
  * handle new connector

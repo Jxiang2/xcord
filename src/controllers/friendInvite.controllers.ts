@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 import {ICustomRequest, IJwtUser} from "../types";
 import UserModels from "../models/user.models";
 import friendInvite from "../models/friendInvite.models";
-import {updateFriendsPendingInvites} from "../socketHandlers/friendUpdatesHandler";
+import {updateFriendsPendingInvites} from "../socketHandlers/friendInviteUpdatesHandler";
 
 /**
  * send friend invitation

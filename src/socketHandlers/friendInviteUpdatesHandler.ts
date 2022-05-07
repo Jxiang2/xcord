@@ -9,7 +9,7 @@ export const updateFriendsPendingInvites = async (userId: string) => {
       .populate("senderId", "_id username mail")
 
     // find all active user sockets
-    const receiverSocketList = socketStorage.getActiveUsers(userId);
+    const receiverSocketList = socketStorage.getActiveSockets(userId);
 
     const io = socketStorage.getSocketIoInstance();
 

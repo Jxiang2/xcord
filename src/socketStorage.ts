@@ -39,7 +39,7 @@ const removeConnectedUser = (socketId: string) => {
  * get a users' all currently online sockets
  * @param userId
  */
-const getActiveUsers = (userId: string) => {
+const getActiveSockets = (userId: string) => {
   const activeConnections: string[] = [];
 
   // key: socketId, value: userId
@@ -54,7 +54,7 @@ const getActiveUsers = (userId: string) => {
 const socketStorage =  {
   addNewConnectedUser,
   removeConnectedUser,
-  getActiveUsers,
+  getActiveSockets,
   setSocketIoInstance,
   getSocketIoInstance
 };

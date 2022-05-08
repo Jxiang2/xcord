@@ -20,15 +20,24 @@ export const registerSocketServer = (httpServer: http.Server) => {
 
   socketStorage.setSocketIoInstance(io);
 
-  // middleware, invoked before events
+  // middlewares
   io.use((socket, next: any | NextFunction) => verifyTokenSocket(socket, next));
+
+  // emitters
+  const emitOnlineUsers = () => {
+    const onlineUsers = socketStorage.getOnlineUsers();
+    io.emit("online-users", {onlineUsers})
+  }
 
   // events
   io.on("connection", async (socket) => {
     await newConnectionHandler(socket, io);
+    emitOnlineUsers();
 
     socket.on("disconnect", () => {
       disconnectHandler(socket);
     });
   });
+
+  setInterval(()=> emitOnlineUsers(), 8000);
 };

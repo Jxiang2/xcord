@@ -51,12 +51,26 @@ const getActiveSockets = (userId: string) => {
   return activeConnections;
 }
 
+/**
+ * get currently online users' userId AND socketId
+ */
+const getOnlineUsers = () => {
+  const onlineUsers: IAddNewConnectedUser[] = [];
+
+  connectedUsers.forEach((value, key) => {
+    onlineUsers.push({socketId: key, userId: value.userId})
+  });
+
+  return onlineUsers;
+}
+
 const socketStorage =  {
   addNewConnectedUser,
   removeConnectedUser,
   getActiveSockets,
   setSocketIoInstance,
-  getSocketIoInstance
+  getSocketIoInstance,
+  getOnlineUsers
 };
 
 export default socketStorage;

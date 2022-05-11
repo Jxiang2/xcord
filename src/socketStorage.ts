@@ -1,6 +1,7 @@
 import {IAddNewConnectedUser} from "./types";
 import {Server} from "socket.io";
 import {DefaultEventsMap} from "socket.io/dist/typed-events";
+import {Response} from "express";
 
 const connectedUsers = new Map(); // online indicator
 
@@ -27,11 +28,14 @@ const addNewConnectedUser = ({socketId, userId}: IAddNewConnectedUser) => {
 /**
  * remove a connector from the temporary memory
  * @param socketId
+ * @param res
  */
-const removeConnectedUser = (socketId: string) => {
+const removeConnectedUser = (socketId: string, res: Response) => {
   if (connectedUsers.has(socketId)) {
     connectedUsers.delete(socketId);
     console.log("current connected users: ", connectedUsers);
+  } else {
+    res.status(404).json({message: "user not found in socket storage"})
   }
 };
 

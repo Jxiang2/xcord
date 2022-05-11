@@ -32,6 +32,7 @@ export const registerSocketServer = (httpServer: http.Server) => {
   // events
   io.on("connection", async (socket) => {
     await newConnectionHandler(socket, io);
+
     emitOnlineUsers();
 
     socket.on("disconnect", () => {

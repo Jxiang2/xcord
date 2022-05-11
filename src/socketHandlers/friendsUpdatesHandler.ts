@@ -29,6 +29,7 @@ export const updateFriendsPendingInvites = async (userId: string) => {
     }
   } catch (e) {
     console.log(e);
+    throw Error(e as string | undefined)
   }
 };
 
@@ -71,5 +72,6 @@ export const updateFriends = async (userId: string) => {
     }
   } catch (e) {
     console.log(e);
+    throw Error(e as string | undefined)
   }
 }

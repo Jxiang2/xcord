@@ -1,7 +1,7 @@
 import {IAddNewConnectedUser} from "./types";
 import {Server} from "socket.io";
 import {DefaultEventsMap} from "socket.io/dist/typed-events";
-import {Response} from "express";
+import express, {Response} from "express";
 
 const connectedUsers = new Map(); // online indicator
 
@@ -30,7 +30,7 @@ const addNewConnectedUser = ({socketId, userId}: IAddNewConnectedUser) => {
  * @param socketId
  * @param res
  */
-const removeConnectedUser = (socketId: string, res: Response) => {
+const removeConnectedUser = (socketId: string, res: Response = express().response) => {
   if (connectedUsers.has(socketId)) {
     connectedUsers.delete(socketId);
     console.log("current connected users: ", connectedUsers);

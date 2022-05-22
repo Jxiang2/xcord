@@ -33,3 +33,11 @@ export interface IFriendProperties {
   mail: string
   username: string
 }
+
+export interface IDirectMessageData {
+  content: string,
+  receiverUserId: {
+    id: string,
+    name: string
+  }
+}

@@ -5,6 +5,7 @@ import {newConnectionHandler} from "./socketHandlers/newConnectionHandler";
 import {NextFunction} from "express";
 import {disconnectHandler} from "./socketHandlers/disconnectHandler";
 import socketStorage from "./socketStorage";
+import directMessageHandler from "./socketHandlers/directMessageHandler";
 
 /**
  * use socket.io server to wrap the http server
@@ -26,7 +27,7 @@ export const registerSocketServer = (httpServer: http.Server) => {
   // emitters
   const emitOnlineUsers = () => {
     const onlineUsers = socketStorage.getOnlineUsers();
-    io.emit("online-users", {onlineUsers})
+    io.emit("online-users", {onlineUsers: onlineUsers})
   }
 
   // events
@@ -34,6 +35,10 @@ export const registerSocketServer = (httpServer: http.Server) => {
     await newConnectionHandler(socket, io);
 
     emitOnlineUsers();
+
+    socket.on("direct-message", (data) => {
+      directMessageHandler(socket, data);
+    })
 
     socket.on("disconnect", () => {
       disconnectHandler(socket);

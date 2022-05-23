@@ -1,7 +1,7 @@
 import {Socket} from "socket.io";
-import conversationModels from "../models/conversation";
-import {updateChatHistory} from "./updates/chatUpdates";
-import {ICustomSocketData, IJwtUser} from "../types";
+import conversationModels from "../../models/conversation";
+import {updateChatHistory} from "../updates/chatUpdates";
+import {ICustomSocketData, IJwtUser} from "../../types";
 
 /**
  * retrieve real-time chat history between 2 users

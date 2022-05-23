@@ -1,8 +1,8 @@
 import {Socket} from "socket.io";
-import {ICustomSocketData, IDirectMessageData, IJwtUser} from "../types";
-import messageModels from "../models/message";
-import conversationModels from "../models/conversation";
-import {updateChatHistory} from "./updates/chatUpdates";
+import {ICustomSocketData, IDirectMessageData, IJwtUser} from "../../types";
+import messageModels from "../../models/message";
+import conversationModels from "../../models/conversation";
+import {updateChatHistory} from "../updates/chatUpdates";
 
 /**
  * handle direct messages between 2 users, and update their chat history in real-time.

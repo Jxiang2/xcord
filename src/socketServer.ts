@@ -5,8 +5,8 @@ import {newConnectionHandler} from "./socketHandlers/newConnectionHandler";
 import {NextFunction} from "express";
 import {disconnectHandler} from "./socketHandlers/disconnectHandler";
 import socketStorage from "./socketStorage";
-import directMessageHandler from "./socketHandlers/directMessageHandler";
-import {directChatHistoryHandler} from "./socketHandlers/directChatHistoryHandler";
+import directMessageHandler from "./socketHandlers/directChat/directMessageHandler";
+import {directChatHistoryHandler} from "./socketHandlers/directChat/directChatHistoryHandler";
 
 /**
  * use socket.io server to wrap the http server

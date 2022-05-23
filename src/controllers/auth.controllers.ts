@@ -46,7 +46,8 @@ const postRegister = async (req: Request, res: Response) => {
     const userDetails: IUserLoginData = {
       mail: user.mail,
       token: getJWTToken(user._id, user.mail),
-      username: user.username
+      username: user.username,
+      _id: user._id
     };
 
     return res.status(201).json(userDetails);
@@ -70,7 +71,8 @@ const postLogin = async (req: Request, res: Response) => {
       const userDetails: IUserLoginData = {
         mail: user.mail,
         token: getJWTToken(user._id, user.mail),
-        username: user.username
+        username: user.username,
+        _id: user._id
       };
 
       return res.status(200).json(userDetails);

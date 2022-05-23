@@ -35,13 +35,13 @@ const directMessageHandler = async (socket: Socket, data: IDirectMessageData) =>
       // real-time update to sender & receiver if is online
       await updateChatHistory(conversation._id.toString());
     } else {
-      await conversationModels.create({
+      const newConversation = await conversationModels.create({
         participants: [userId, receiverUserId],
         messages: [message._id],
       });
 
       // real-time update to sender & receiver if is online
-      await updateChatHistory(conversation._id.toString());
+      await updateChatHistory(newConversation._id.toString());
     }
   } catch (err) {
     console.log(err);

@@ -21,6 +21,7 @@ export interface IUserLoginData {
   mail: string;
   token: string;
   username: string;
+  _id: string;
 }
 
 export interface IAddNewConnectedUser {

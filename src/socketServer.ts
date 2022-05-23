@@ -46,7 +46,6 @@ export const registerSocketServer = (httpServer: http.Server) => {
     });
 
     socket.on("direct-chat-history", (data)=>{
-      console.log(data);
       directChatHistoryHandler(socket, data);
     })
   });

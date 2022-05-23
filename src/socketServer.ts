@@ -41,13 +41,26 @@ export const registerSocketServer = (httpServer: http.Server) => {
       directMessageHandler(socket, data);
     })
 
-    socket.on("disconnect", () => {
-      disconnectHandler(socket);
-    });
+    socket.on("group-message", (data) => {
+      // TODO
+      // groupMessageHandler(socket, data)
+    })
 
     socket.on("direct-chat-history", (data)=>{
       directChatHistoryHandler(socket, data);
     })
+
+    socket.on("group-chat-history", (data) => {
+      // TODO
+      // groupChatHistoryHandler(socket, data)
+    })
+
+    socket.on("disconnect", () => {
+      disconnectHandler(socket);
+    });
+
+    // TODO
+    // group video chat
   });
 
   setInterval(()=> emitOnlineUsers(), 8000);

@@ -17,26 +17,26 @@ const directMessageHandler = async (socket: Socket, data: IDirectMessageData) =>
       type: "DIRECT"
     })
 
-    // find if conversation exists between sender and receiver
+    // find conversation if it exists between sender and receiver
     const conversation = await conversationModels.findOne({
       participants: { $all: [userId, receiverUserId]}
     })
 
     if (conversation) {
-      conversation.push(message._id);
+      conversation.messages.push(message._id);
       await conversation.save();
 
       // perform and update to sender and receiver
     } else {
       const newConversation = await conversationModels.create({
+        participants: [userId, receiverUserId],
         messages: [message._id],
-        participants: [userId, receiverUserId]
       });
 
       // real-time update to sender & receiver if is online
     }
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.log(err);
   }
 }
 

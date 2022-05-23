@@ -17,18 +17,17 @@ const updateChatHistory = async (conversationId: string, toSpecifiedSocketId: st
       const io = socketStorage.getSocketIoInstance();
 
       if (toSpecifiedSocketId) {
-        // init update of chat history
+        // init update of chat history for when user requesting it at the first time
         return io?.to(toSpecifiedSocketId).emit("direct-chat-history", {
           messages: conversation.messages,
           participants: conversation.participants
         });
       }
 
-      // check if users of this conversation are online
-      // if yes, update them of messages
+      // update all chat participants the chat history if they are online
       conversation.participants.forEach((userId: string) => {
         const activeConnections = socketStorage.getActiveSockets(userId.toString());
-        activeConnections.forEach(socketId => {
+        return activeConnections.forEach(socketId => {
           io?.to(socketId).emit("direct-chat-history", {
             messages: conversation.messages,
             participants: conversation.participants

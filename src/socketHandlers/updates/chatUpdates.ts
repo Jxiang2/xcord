@@ -1,6 +1,11 @@
 import conversationModels from "../../models/conversation"
 import socketStorage from "../../socketStorage";
 
+/**
+ * update real-time chat history between 2 users
+ * @param conversationId
+ * @param toSpecifiedSocketId
+ */
 const updateChatHistory = async (conversationId: string, toSpecifiedSocketId: string | null = null) => {
     const conversation = await conversationModels.findById(conversationId).populate({
       path: "messages",

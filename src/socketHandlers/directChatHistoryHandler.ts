@@ -3,6 +3,11 @@ import conversationModels from "../models/conversation";
 import {updateChatHistory} from "./updates/chatUpdates";
 import {ICustomSocketData, IJwtUser} from "../types";
 
+/**
+ * retrieve real-time chat history between 2 users
+ * @param socket
+ * @param data
+ */
 const directChatHistoryHandler = async (socket: Socket, data: { receiverUserId: '6276fb4d7e012ac433690af1' }) => {
   try {
     const customSocket = socket as ICustomSocketData;

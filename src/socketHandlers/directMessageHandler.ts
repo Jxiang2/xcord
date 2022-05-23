@@ -4,6 +4,11 @@ import messageModels from "../models/message";
 import conversationModels from "../models/conversation";
 import {updateChatHistory} from "./updates/chatUpdates";
 
+/**
+ * handle direct messages between 2 users, and update their chat history in real-time.
+ * @param socket
+ * @param data
+ */
 const directMessageHandler = async (socket: Socket, data: IDirectMessageData) => {
   try {
     const customSocket = socket as ICustomSocketData;
@@ -30,7 +35,7 @@ const directMessageHandler = async (socket: Socket, data: IDirectMessageData) =>
       // real-time update to sender & receiver if is online
       await updateChatHistory(conversation._id.toString());
     } else {
-      const newConversation = await conversationModels.create({
+      await conversationModels.create({
         participants: [userId, receiverUserId],
         messages: [message._id],
       });

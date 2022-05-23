@@ -1,7 +1,7 @@
-import userModels from "../models/user.models";
-import friendInviteModels from "../models/friendInvite.models";
-import socketStorage from "../socketStorage";
-import {IFriendProperties} from "../types";
+import userModels from "../../models/user.models";
+import friendInviteModels from "../../models/friendInvite.models";
+import socketStorage from "../../socketStorage";
+import {IFriendProperties} from "../../types";
 
 /**
  * real-time update the pending invites of a specific user

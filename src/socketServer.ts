@@ -6,6 +6,7 @@ import {NextFunction} from "express";
 import {disconnectHandler} from "./socketHandlers/disconnectHandler";
 import socketStorage from "./socketStorage";
 import directMessageHandler from "./socketHandlers/directMessageHandler";
+import {directChatHistoryHandler} from "./socketHandlers/directChatHistoryHandler";
 
 /**
  * use socket.io server to wrap the http server
@@ -43,6 +44,11 @@ export const registerSocketServer = (httpServer: http.Server) => {
     socket.on("disconnect", () => {
       disconnectHandler(socket);
     });
+
+    socket.on("direct-chat-history", (data)=>{
+      console.log(data);
+      directChatHistoryHandler(socket, data);
+    })
   });
 
   setInterval(()=> emitOnlineUsers(), 8000);

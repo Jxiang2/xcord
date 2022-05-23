@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import friendInviteModels from "../models/friendInvite.models";
-import {updateFriends, updateFriendsPendingInvites} from "../socketHandlers/friendsUpdatesHandler";
+import {updateFriends, updateFriendsPendingInvites} from "../socketHandlers/updates/friendsUpdates";
 import {ICustomRequest, IJwtUser} from "../types";
 import FriendInviteModels from "../models/friendInvite.models";
 import userModels from "../models/user.models";

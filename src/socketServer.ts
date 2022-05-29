@@ -58,9 +58,6 @@ export const registerSocketServer = (httpServer: http.Server) => {
     socket.on("disconnect", () => {
       disconnectHandler(socket);
     });
-
-    // TODO
-    // group video chat
   });
 
   setInterval(()=> emitOnlineUsers(), 8000);
